@@ -1,0 +1,43 @@
+"""
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="今日の夕飯メーカー - YabaiHub">
+    <meta property="og:description" content="今日の夕飯をランダムで決めよう！">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yabaihub.example.com/dinner">
+    <meta property="og:image" content="/static/ogp.jpg">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>今日の夕飯メーカー</title>
+</head>
+<body>
+    <div class="container">
+        <h1>今日の夕飯メーカー</h1>
+        <p>今日の夕飯をランダムで決めてみよう！</p>
+        <button onclick="getDinner()">決める！</button>
+        <h2 id="result"></h2>
+        <div id="share" style="display:none;">
+            <p>↓この結果をシェアしよう！</p>
+            <a id="twitter-share" target="_blank">Xでシェア</a>
+        </div>
+    </div>
+    <script>
+        function getDinner() {
+            fetch('/random_dinner')
+                .then(response => response.json())
+                .then(data => {
+                    const result = data.result;
+                    document.getElementById('result').textContent = result;
+                    const text = encodeURIComponent("今日の夕飯は「" + result + "」でした！ #YabaiHub");
+                    const url = encodeURIComponent(window.location.href);
+                    const shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+                    document.getElementById('twitter-share').href = shareUrl;
+                    document.getElementById('share').style.display = 'block';
+                });
+        }
+    </script>
+</body>
+</html>
+"""

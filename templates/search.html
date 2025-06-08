@@ -1,0 +1,35 @@
+"""
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YabaiHub - AI検索</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 YabaiHub 検索</h1>
+        <p>やりたいことを自然文で入力して、関連する機能を探してみよう！</p>
+        <form method="POST">
+            <input type="text" name="query" placeholder="例: 夕飯決めたい、サイン作りたい" required style="width: 80%; padding: 0.5em;">
+            <button type="submit">検索</button>
+        </form>
+
+        {% if results %}
+            <h2>🔗 関連する機能：</h2>
+            <ul style="list-style:none; padding-left: 0;">
+                {% for item in results %}
+                    <li style="margin-bottom: 1em;">
+                        <a href="{{ item.url }}"><strong>{{ item.title }}</strong></a><br>
+                        <small>{{ item.description }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% elif query %}
+            <p>一致する機能が見つかりませんでした。</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+"""

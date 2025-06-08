@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サイン自動生成 - YabaiHub</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>サイン自動生成</h1>
+    <p>あなたの名前を入力して、サイン風にしてみよう！</p>
+    <input type="text" id="name" placeholder="名前を入力" />
+    <button onclick="generateSign()">サインを作成</button>
+    <h2 id="signature"></h2>
+    <div id="share" style="display:none;">
+      <p>↓このサインをシェアしよう！</p>
+      <a id="twitter-share" target="_blank">Xでシェア</a>
+    </div>
+  </div>
+
+  <script>
+    function generateSign() {
+      const name = document.getElementById("name").value;
+      if (!name) {
+        alert("名前を入力してください");
+        return;
+      }
+      fetch('/generate_sign?name=' + encodeURIComponent(name))
+        .then(response => response.json())
+        .then(data => {
+          const sign = data.signature;
+          document.getElementById("signature").textContent = sign;
+          const text = encodeURIComponent("私のサインは「" + sign + "」！ #YabaiHub");
+          const url = encodeURIComponent(window.location.href);
+          const shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+          document.getElementById("twitter-share").href = shareUrl;
+          document.getElementById("share").style.display = 'block';
+        });
+    }
+  </script>
+</body>
+</html>

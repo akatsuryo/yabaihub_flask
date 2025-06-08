@@ -1,0 +1,29 @@
+"""
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YabaiHub - ホーム</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>YabaiHub</h1>
+    <p>ちょっとバカっぽくて親しみやすいミニ機能まとめ</p>
+
+    <!-- 🔍 検索フォーム -->
+    <form method="POST" action="/search" style="margin-bottom: 2em;">
+      <input type="text" name="query" placeholder="例: サイン作りたい、夕飯決めたい" required style="width: 80%; padding: 0.5em;">
+      <button type="submit">検索</button>
+    </form>
+
+    <!-- 🧩 機能リンク一覧 -->
+    <ul style="list-style:none; padding:0;">
+      <li style="margin-bottom: 1em;"><a href="/dinner">🍛 今日の夕飯メーカー</a></li>
+      <li style="margin-bottom: 1em;"><a href="/sign">✍️ サイン自動生成</a></li>
+    </ul>
+  </div>
+</body>
+</html>
+"""
